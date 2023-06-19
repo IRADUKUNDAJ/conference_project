@@ -14,15 +14,25 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# from django.contrib import admin
+# from django.urls import path, include
+# from core import views
+
+# urlpatterns = [
+#     # www.conference.rw/admin/
+#     path('admin/', admin.site.urls),
+
+
+#     path('', include('core.urls'))
+
+# ]
+from django.conf import settings
 from django.contrib import admin
-from django.urls import path, include
-from core import views
-
+from django.urls import include, path
+from django.conf.urls.static import static
 urlpatterns = [
-    # www.conference.rw/admin/
-    path('admin/', admin.site.urls),
-
-
-    path('', include('core.urls'))
-
+    path("", include("conference.urls")),
+    path("admin/", admin.site.urls),
 ]
+if settings.DEBUG:  
+        urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT) 
